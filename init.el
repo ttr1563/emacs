@@ -6,7 +6,7 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-n(set-locale-environment nil)
+(set-locale-environment nil)
 (set-language-environment "Japanese")
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -18,8 +18,6 @@ n(set-locale-environment nil)
 
 ;;shift選択・command + c追加
 (setq pc-select-selection-keys-only t)
-(pc-selection-mode 1)
-(mac-key-mode 1)
 
 ;; ロックファイル / バックアップファイルを作成しない
 (setq create-lockfiles nil)
@@ -39,8 +37,9 @@ n(set-locale-environment nil)
 (display-time)
 
 ;; 行番号を常に表示させる
-(global-linum-mode)
-(setq linum-format "%4d ")
+(autoload 'setnu-mode "setnu" nil t)
+(global-set-key [f12] 'setnu-mode)
+
 
 ;; 現在行を目立たせる
 (setq hl-line-face 'underline)
