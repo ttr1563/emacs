@@ -6,7 +6,7 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-(set-locale-environment nil)
+n(set-locale-environment nil)
 (set-language-environment "Japanese")
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -14,6 +14,12 @@
 (setq default-buffer-file-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (prefer-coding-system 'utf-8-unix)
+
+
+;;shift選択・command + c追加
+(setq pc-select-selection-keys-only t)
+(pc-selection-mode 1)
+(mac-key-mode 1)
 
 ;; ロックファイル / バックアップファイルを作成しない
 (setq create-lockfiles nil)
@@ -64,6 +70,28 @@
 (load-theme 'monokai t)
 
 
+;; 行をそのまま移動する
+(defun move-line-down ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (forward-line)
+      (transpose-lines 1))
+    (forward-line)
+    (move-to-column col)))
+
+(defun move-line-up ()
+  (interactive)
+  (let ((col (current-column)))
+    (save-excursion
+      (forward-line)
+      (transpose-lines -1))
+    (move-to-column col)))
+
+(global-set-key (kbd "M-N") 'move-line-down)
+(global-set-key (kbd "M-P") 'move-line-up)
+
+
 ;; カスタムセット
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -85,3 +113,4 @@
 ;; web mode
 (setq web-mode-auto-close-style 1)
 (setq web-mode-tag-auto-close-style t)
+
